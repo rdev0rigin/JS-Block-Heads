@@ -15,34 +15,59 @@ export function blockHead(target, key, descriptor){
 
 export const BlockHead = blockChainMixin();
 
-// used to mixin behavior
-const BlockChain = {
-	addLink(){
-	
-	}
-};
-
 function blockChainMixin(){
-	const props = {
-	// create a Genesis block
+	let blockChain = [];
+	// used to mixin behavior
+	const BlockChainBehavior = {
+		addLink(){
+			console.log('Adding link!');
+		},
+		getHashes(){
+		
+		},
+		getChain(){
+			return blockChain;
+		}
+		
+	};
 	
+	// create a Genesis block
+	function genBlock(initTarget) {
+		return {
+			hash: checkSum(initTarget.toString()),
+			hashHistory: [],
+		}
+	}
 	// create hash
 	
 	// add link
+	const bKeys = Reflect.ownKeys(BlockChainBehavior);
 	
-	};
 	function _mixin(clazz){
-		const clazzProxy = new Proxy(clazz, {
+		return new Proxy(clazz, {
 			construct(target, args, newTarget) {
-				console.log('hash?', checkSum(target.toString()));
-				return new target(args);
-			}
+			let instance = new target(...args);
+				blockChain = [genBlock(instance)];
+				for (let key of bKeys) {
+					Object.defineProperty(instance, key, {
+						value: BlockChainBehavior[key]
+					});
+				}
+				let instanceProxy = new Proxy(instance, {
+					set(target, prop, value, receiver) {
+						blockChain = [...blockChain, ]
+						target[prop] = value;
+						console.log(`property set: ${prop}  =  ${value}`);
+						return true;
+					}
+					
+				});
+				return instanceProxy;
+			},
 		});
-		return clazzProxy;
 	}
 	return _mixin;
 }
-
 
 // https://gist.github.com/nblackburn/17530c05520a33a4e872dbcc4f258261
 function checkSum(string){
