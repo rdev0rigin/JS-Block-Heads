@@ -1,8 +1,6 @@
 import { blockHead, BlockHead } from './lib/block-head.decorator';
 
 console.log('Test');
-
-
 @BlockHead
 class Cat {
 	name: any = 'default';
@@ -15,7 +13,10 @@ class Cat {
 
 let House: any = new Cat();
 House.foo = 'Bat Metal \\,,/';
-House.name = 'House';
+House.bar = {
+	otherKitty: 'Merp'
+};
+House.name = 'Betty';
 House.addLink();
 console.log('cat', House.meow());
 House.name = 'Lulu';

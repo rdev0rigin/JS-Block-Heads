@@ -106,14 +106,17 @@ var Cat = /** @class */ (function () {
     ], Cat);
     return Cat;
 }());
-var Betty = new Cat();
-Betty.foo = 'Bat Metal';
-Betty.name = 'Betty';
-Betty.addLink();
-console.log('cat', Betty.meow());
-Betty.name = 'Ninja';
-console.log('cat', Betty.meow());
-console.log('cat', Betty.getChain());
+var House = new Cat();
+House.foo = 'Bat Metal \\,,/';
+House.bar = {
+    otherKitty: 'Merp'
+};
+House.name = 'Betty';
+House.addLink();
+console.log('cat', House.meow());
+House.name = 'Lulu';
+console.log('cat', House.meow());
+console.log('cat', House.getChain());
 
 
 /***/ }),
@@ -140,47 +143,53 @@ function blockHead(target, key, descriptor) {
 var BlockHead = blockChainMixin();
 function blockChainMixin() {
     var blockChain = [];
+    var hashHistory = [];
+    var hash = 0x00000000;
     // used to mixin behavior
     var BlockChainBehavior = {
         addLink: function () {
             console.log('Adding link!');
         },
+        getHash: function () {
+        },
         getHashes: function () {
         },
         getChain: function () {
             return blockChain;
+        },
+        // create a new block
+        genBlock: function (nextObj) {
+            hash = checkSum(JSON.stringify(nextObj));
+            console.log('hashing', JSON.stringify(nextObj), hash);
+            hashHistory = hashHistory.concat([hash]);
+            return {
+                hash: hash,
+                hashHistory: hashHistory,
+            };
         }
     };
-    // create a Genesis block
-    function genBlock(initTarget) {
-        return {
-            hash: checkSum(initTarget.toString()),
-            hashHistory: [],
-        };
-    }
-    // create hash
     // add link
     var bKeys = Reflect.ownKeys(BlockChainBehavior);
     function _mixin(clazz) {
         return new Proxy(clazz, {
-            construct: function (target, args, newTarget) {
+            construct: function (target, args) {
                 var instance = new (target.bind.apply(target, [void 0].concat(args)))();
-                blockChain = [genBlock(instance)];
                 for (var _i = 0, bKeys_1 = bKeys; _i < bKeys_1.length; _i++) {
                     var key = bKeys_1[_i];
                     Object.defineProperty(instance, key, {
                         value: BlockChainBehavior[key]
                     });
                 }
-                var instanceProxy = new Proxy(instance, {
-                    set: function (target, prop, value, receiver) {
-                        blockChain = blockChain.slice();
-                        target[prop] = value;
+                blockChain = [instance.genBlock(instance)];
+                return new Proxy(instance, {
+                    set: function (setTarget, prop, value) {
+                        setTarget[prop] = value;
+                        console.log('set Target', setTarget);
+                        blockChain = blockChain.concat([instance.genBlock(setTarget)]);
                         console.log("property set: " + prop + "  =  " + value);
                         return true;
                     }
                 });
-                return instanceProxy;
             },
         });
     }
@@ -189,7 +198,7 @@ function blockChainMixin() {
 // https://gist.github.com/nblackburn/17530c05520a33a4e872dbcc4f258261
 function checkSum(string) {
     var index;
-    var checksum = 0x1235235;
+    var checksum = 0x12332248;
     for (index = 0; index < string.length; index++) {
         checksum += (string.charCodeAt(index) * (index + 1));
     }

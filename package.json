@@ -4,7 +4,7 @@
   "description": "A JS Decorator for adding blockchain funtionality.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "webpack --watch"
   },
   "devDependencies": {
     "awesome-typescript-loader": "^3.4.1",
@@ -19,7 +19,11 @@
     "url": "git+https://github.com/rdev0rigin/JS-Block-Heads.git"
   },
   "keywords": [
+    "blockheads",
+    "blockhead",
+    "blocks",
     "block",
+    "chain",
     "chains",
     "mixin",
     "rdev"
