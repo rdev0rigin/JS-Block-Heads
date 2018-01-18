@@ -1,0 +1,33 @@
+{
+  "name": "js-block-heads",
+  "version": "0.0.1",
+  "description": "A JS Decorator for adding blockchain funtionality.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "awesome-typescript-loader": "^3.4.1",
+    "colortape": "^0.1.2",
+    "tape": "^4.7.0",
+    "typescript": "^2.6.2",
+    "webpack-merge": "^4.1.1",
+    "webpack": "^3.10.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/rdev0rigin/JS-Block-Heads.git"
+  },
+  "keywords": [
+    "block",
+    "chains",
+    "mixin",
+    "rdev"
+  ],
+  "author": "Rob Beatie (RDev1163@outlook.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/rdev0rigin/JS-Block-Heads/issues"
+  },
+  "homepage": "https://github.com/rdev0rigin/JS-Block-Heads#readme"
+}

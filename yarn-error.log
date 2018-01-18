@@ -1,0 +1,63 @@
+Arguments: 
+  /usr/local/bin/node /usr/local/bin/yarn
+
+PATH: 
+  /Library/Frameworks/Python.framework/Versions/3.4/bin:/Users/raven/dev0/gcloud/google-cloud-sdk/bin:/usr/local/bin:/usr/bin:/bin:/usr/sbin:/sbin:/usr/local/share/dotnet:/Library/Frameworks/Mono.framework/Versions/Current/Commands:/Users/raven/
+
+Yarn version: 
+  1.3.2
+
+Node version: 
+  9.3.0
+
+Platform: 
+  darwin x64
+
+npm manifest: 
+  {
+    "name": "js-block-heads",
+    "version": "0.0.1",
+    "description": "A JS Decorator for adding blockchain funtionality.",
+    "main": "index.js",
+    "scripts": {
+      "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "devDependencies": {
+      "awesome-typescript-loader": "^3.4.1",
+      "colortape": "^0.1.2",
+      "tape": "^4.7.0",
+      "typescript": "^2.6.2",
+      "webpack": "^3.10.0",
+    },
+    "repository": {
+      "type": "git",
+      "url": "git+https://github.com/rdev0rigin/JS-Block-Heads.git"
+    },
+    "keywords": [
+      "block",
+      "chains",
+      "mixin",
+      "rdev"
+    ],
+    "author": "Rob Beatie (RDev1163@outlook.com)",
+    "license": "MIT",
+    "bugs": {
+      "url": "https://github.com/rdev0rigin/JS-Block-Heads/issues"
+    },
+    "homepage": "https://github.com/rdev0rigin/JS-Block-Heads#readme"
+  }
+
+yarn manifest: 
+  No manifest
+
+Lockfile: 
+  No lockfile
+
+Trace: 
+  SyntaxError: /Users/raven/dev0/JS-Block-Heads/package.json: Unexpected token } in JSON at position 394
+      at JSON.parse (<anonymous>)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:770:59
+      at Generator.next (<anonymous>)
+      at step (/usr/local/lib/node_modules/yarn/lib/cli.js:92:30)
+      at /usr/local/lib/node_modules/yarn/lib/cli.js:103:13
+      at <anonymous>
